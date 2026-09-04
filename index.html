@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Payment XYUXZ</title>
+<link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+<style>
+  * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    font-family: 'Press Start 2P', cursive;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 24px;
+    background-color: #7ec850;
+    background-image:
+      linear-gradient(rgba(0,0,0,0.08) 2px, transparent 2px),
+      linear-gradient(90deg, rgba(0,0,0,0.08) 2px, transparent 2px),
+      linear-gradient(rgba(255,255,255,0.06) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255,255,255,0.06) 1px, transparent 1px);
+    background-size: 40px 40px, 40px 40px, 40px 40px, 40px 40px;
+    color: #2b2b2b;
+    -webkit-font-smoothing: none;
+    image-rendering: pixelated;
+  }
+
+  .container {
+    width: 100%;
+    max-width: 420px;
+    background: #8a5a34;
+    border: 6px solid #4d3319;
+    box-shadow:
+      inset 0 0 0 6px #a97442,
+      0 10px 0 0 #3a260f,
+      0 12px 20px rgba(0,0,0,0.4);
+    padding: 28px 20px 32px;
+    position: relative;
+    animation: pop-in 0.35s ease-out;
+  }
+
+  @keyframes pop-in {
+    from { opacity: 0; transform: translateY(14px) scale(0.98); }
+    to { opacity: 1; transform: translateY(0) scale(1); }
+  }
+
+  .header {
+    text-align: center;
+    margin-bottom: 26px;
+  }
+
+  .header .block-icon {
+    font-size: 30px;
+    margin-bottom: 10px;
+    display: inline-block;
+    filter: drop-shadow(2px 2px 0 #000);
+  }
+
+  .header h1 {
+    font-size: 15px;
+    color: #ffffff;
+    text-shadow: 3px 3px 0 #3a260f, -1px -1px 0 #3a260f;
+    line-height: 1.6;
+    letter-spacing: 1px;
+  }
+
+  .header p {
+    margin-top: 10px;
+    font-size: 8px;
+    color: #e8dcc0;
+    line-height: 1.8;
+  }
+
+  .btn-group {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .mc-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    width: 100%;
+    padding: 16px 10px;
+    font-family: 'Press Start 2P', cursive;
+    font-size: 10px;
+    color: #ffffff;
+    text-shadow: 2px 2px 0 rgba(0,0,0,0.5);
+    text-decoration: none;
+    cursor: pointer;
+    border: none;
+    outline: none;
+    position: relative;
+    letter-spacing: 0.5px;
+    transition: transform 0.08s ease, box-shadow 0.08s ease, filter 0.15s ease;
+    user-select: none;
+  }
+
+  .mc-btn.malay {
+    background: #c8a83c;
+    box-shadow: inset -4px -6px 0 0 #8a6f22, inset 4px 4px 0 0 #f2df8f, 0 6px 0 0 #6b5316;
+  }
+  .mc-btn.indo {
+    background: #4a8fd6;
+    box-shadow: inset -4px -6px 0 0 #2f5f92, inset 4px 4px 0 0 #9cc4ee, 0 6px 0 0 #1f3f61;
+  }
+  .mc-btn.telegram {
+    background: #3aa3e0;
+    box-shadow: inset -4px -6px 0 0 #1f6c9c, inset 4px 4px 0 0 #a8ddff, 0 6px 0 0 #144a6b;
+  }
+
+  .mc-btn:hover {
+    filter: brightness(1.08);
+    transform: translateY(-2px);
+  }
+
+  .mc-btn:active {
+    transform: translateY(4px);
+    box-shadow: inset -2px -3px 0 0 rgba(0,0,0,0.3), 0 1px 0 0 rgba(0,0,0,0.5);
+  }
+
+  .icon {
+    width: 20px;
+    height: 20px;
+    flex-shrink: 0;
+  }
+
+  .footer-note {
+    margin-top: 22px;
+    text-align: center;
+    font-size: 7px;
+    color: #e8dcc0;
+    line-height: 1.9;
+  }
+
+  /* Modal */
+  .overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.65);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    z-index: 100;
+    padding: 20px;
+    animation: fade-in 0.2s ease-out;
+  }
+
+  .overlay.show {
+    display: flex;
+  }
+
+  @keyframes fade-in {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+
+  .modal {
+    background: #8a5a34;
+    border: 6px solid #4d3319;
+    box-shadow: inset 0 0 0 6px #a97442, 0 10px 24px rgba(0,0,0,0.5);
+    max-width: 340px;
+    width: 100%;
+    padding: 22px 18px 26px;
+    text-align: center;
+    animation: pop-in 0.25s ease-out;
+  }
+
+  .modal h2 {
+    font-size: 11px;
+    color: #ffffff;
+    text-shadow: 2px 2px 0 #3a260f;
+    margin-bottom: 16px;
+    line-height: 1.6;
+  }
+
+  .modal img {
+    width: 100%;
+    max-width: 240px;
+    border: 5px solid #4d3319;
+    box-shadow: inset 0 0 0 4px #d8c9a3;
+    image-rendering: auto;
+    margin-bottom: 14px;
+  }
+
+  .phone-box {
+    background: #4d3319;
+    border: 4px solid #2f1f0f;
+    padding: 14px 10px;
+    font-size: 12px;
+    color: #ffe08a;
+    letter-spacing: 1px;
+    margin-bottom: 14px;
+    word-break: break-all;
+  }
+
+  .copy-btn {
+    font-family: 'Press Start 2P', cursive;
+    font-size: 8px;
+    background: #6bbf3c;
+    color: #fff;
+    border: none;
+    box-shadow: inset -3px -4px 0 0 #4a8a24, inset 3px 3px 0 0 #a0e878, 0 4px 0 0 #33601a;
+    padding: 10px 14px;
+    cursor: pointer;
+    margin-bottom: 12px;
+    transition: transform 0.08s ease;
+  }
+  .copy-btn:active {
+    transform: translateY(3px);
+    box-shadow: none;
+  }
+
+  .close-btn {
+    display: inline-block;
+    margin-top: 4px;
+    font-family: 'Press Start 2P', cursive;
+    font-size: 8px;
+    background: #c0392b;
+    color: #fff;
+    border: none;
+    box-shadow: inset -3px -4px 0 0 #8e2c22, inset 3px 3px 0 0 #e57468, 0 4px 0 0 #6e1e17;
+    padding: 10px 16px;
+    cursor: pointer;
+    transition: transform 0.08s ease;
+  }
+  .close-btn:active {
+    transform: translateY(3px);
+    box-shadow: none;
+  }
+
+  .toast {
+    position: fixed;
+    bottom: 26px;
+    left: 50%;
+    transform: translateX(-50%) translateY(20px);
+    background: #2f1f0f;
+    color: #ffe08a;
+    font-family: 'Press Start 2P', cursive;
+    font-size: 8px;
+    padding: 12px 18px;
+    border: 3px solid #6bbf3c;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.25s ease, transform 0.25s ease;
+    z-index: 200;
+    text-align: center;
+  }
+  .toast.show {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+  }
+
+  @media (max-width: 380px) {
+    .header h1 { font-size: 12px; }
+    .mc-btn { font-size: 8px; }
+  }
+</style>
+</head>
+<body>
+
+  <div class="container">
+    <div class="header">
+      <div class="block-icon">⛏️🟩</div>
+      <h1>PAYMENT<br>XYUXZ</h1>
+      <p>Pilih metode pembayaran<br>di bawah ini</p>
+    </div>
+
+    <div class="btn-group">
+      <button class="mc-btn malay" onclick="openMalay()">
+        <span>🇲🇾</span> PAY MALAY
+      </button>
+
+      <button class="mc-btn indo" onclick="openIndo()">
+        <span>🇮🇩</span> PAY INDO
+      </button>
+
+      <a class="mc-btn telegram" href="https://t.me/maklowmaling" target="_blank" rel="noopener noreferrer">
+        <svg class="icon" viewBox="0 0 240 240" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="120" cy="120" r="120" fill="#37aee2"/>
+          <path d="M180 72L157 178c-2 9-7 11-14 7l-40-30-19 18c-2 2-4 4-8 4l3-40 73-66c3-3-1-5-5-2l-90 57-39-12c-8-3-8-8 2-12l153-59c7-2 13 2 11 12z" fill="#fff"/>
+        </svg>
+        TELEGRAM
+      </a>
+    </div>
+
+    <div class="footer-note">
+      Kirim bukti transfer melalui<br>tombol Telegram di atas
+    </div>
+  </div>
+
+  <!-- Modal Malay -->
+  <div class="overlay" id="overlayMalay">
+    <div class="modal">
+      <h2>SCAN QR<br>PAYMENT MALAYSIA</h2>
+      <img src="https://files.catbox.moe/vxvpul.jpg" alt="QR Malaysia">
+      <br>
+      <button class="close-btn" onclick="closeModal('overlayMalay')">TUTUP</button>
+    </div>
+  </div>
+
+  <!-- Modal Indo -->
+  <div class="overlay" id="overlayIndo">
+    <div class="modal">
+      <h2>PAYMENT<br>INDONESIA</h2>
+      <div class="phone-box" id="phoneNumber">0882015545530</div>
+      <br>
+      <button class="copy-btn" onclick="copyPhone()">SALIN NOMOR</button>
+      <br>
+      <button class="close-btn" onclick="closeModal('overlayIndo')">TUTUP</button>
+    </div>
+  </div>
+
+  <div class="toast" id="toast">Nomor disalin!</div>
+
+  <script>
+    function openMalay() {
+      document.getElementById('overlayMalay').classList.add('show');
+    }
+    function openIndo() {
+      document.getElementById('overlayIndo').classList.add('show');
+    }
+    function closeModal(id) {
+      document.getElementById(id).classList.remove('show');
+    }
+
+    // klik di luar modal untuk menutup
+    document.querySelectorAll('.overlay').forEach(overlay => {
+      overlay.addEventListener('click', function(e) {
+        if (e.target === overlay) {
+          overlay.classList.remove('show');
+        }
+      });
+    });
+
+    function copyPhone() {
+      const text = document.getElementById('phoneNumber').innerText;
+      navigator.clipboard.writeText(text).then(() => {
+        showToast();
+      }).catch(() => {
+        const ta = document.createElement('textarea');
+        ta.value = text;
+        document.body.appendChild(ta);
+        ta.select();
+        document.execCommand('copy');
+        document.body.removeChild(ta);
+        showToast();
+      });
+    }
+
+    function showToast() {
+      const toast = document.getElementById('toast');
+      toast.classList.add('show');
+      setTimeout(() => toast.classList.remove('show'), 1800);
+    }
+  </script>
+
+</body>
+</html>
